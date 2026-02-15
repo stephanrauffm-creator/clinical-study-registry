@@ -5,6 +5,7 @@ import uuid
 from pathlib import Path
 
 from django.contrib.auth.models import User
+from django.core.management import call_command
 from django.db import IntegrityError
 from django.test import TestCase, override_settings
 from openpyxl import Workbook
@@ -97,6 +98,24 @@ class StudyAppTests(TestCase):
         protected = self.client.get("/entries")
         self.assertEqual(protected.status_code, 302)
         self.assertIn("/login", protected.url)
+
+
+    def test_login_page_uses_absolute_static_css_path(self):
+        response = self.client.get("/login/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'href="/static/study/style.css"')
+
+    def test_create_demo_users_command_allows_login(self):
+        call_command("create_demo_users")
+
+        response = self.client.post(
+            "/login/",
+            data={"username": "demo_user", "password": "DemoUser2026!"},
+            follow=False,
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/entries", response["Location"])
 
     def test_write_workbook_atomic_removes_stale_lock(self):
         export_root = os.path.join(os.getcwd(), "test_artifacts", str(uuid.uuid4()))
