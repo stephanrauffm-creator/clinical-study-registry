@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<section class="split-grid">
+    <article class="card">
+        <h2>Welcome</h2>
+        <p class="muted">
+            Clinical Study Registry is an authenticated workspace for pseudonymized
+            patient-study data.
+        </p>
+        <ul class="info-list">
+            <li>Capture and edit study entries by PIZ and exam date.</li>
+            <li>Export filtered data to Excel with audit tracking.</li>
+            <li>Store and distribute instruction PDFs to team members.</li>
+        </ul>
+    </article>
+
+    <article class="card narrow">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign In</button>
+        </form>
+    </article>
+</section>
+{% endblock %}

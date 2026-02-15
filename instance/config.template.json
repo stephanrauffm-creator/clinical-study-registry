@@ -1,0 +1,12 @@
+{
+  "SECRET_KEY": "replace-with-strong-secret-key",
+  "DEBUG": false,
+  "ALLOWED_HOSTS": ["127.0.0.1", "localhost"],
+  "DATA_XLSX_PATH": "./exports/study_entries.xlsx",
+  "MEDIA_ROOT": "./media",
+  "LOG_DIR": "./logs",
+  "BACKUP_ENABLED": true,
+  "BACKUP_KEEP_DAYS": 14,
+  "BACKUP_DIR": "./backups",
+  "DATABASE_URL": ""
+}
