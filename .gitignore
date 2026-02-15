@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+.tmp/
 db.sqlite3
 media/
 logs/
